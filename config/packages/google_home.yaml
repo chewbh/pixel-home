@@ -1,0 +1,34 @@
+google_assistant:
+  project_id: home-automation-281517
+  service_account: !include ../home-automation-eb39427e8c3e.json
+  report_state: false
+  expose_by_default: false
+  # exposed_domains:
+  # - alarm_control_panel
+  # - camera
+  # - group
+  # - input_boolean
+  # - input_select
+  # - scene
+  # - script
+  # - switch
+  # - fan
+  # - light
+  # - lock
+  # - cover
+  # - media_player
+  # - climate
+  # - vacuum
+  # - sensor
+  entity_config:
+    light.gateway_light_04cf8cf31411:
+      name: Bedroom Night Light
+      aliases:
+        - GATEWAY_LIGHT
+      expose: true
+    fan.kdk_bedroom_fan:
+      name: Bedroom Fan
+      expose: true
+    climate.bedroom_air_con:
+      name: Air Con
+      expose: true

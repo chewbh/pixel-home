@@ -1,0 +1,9 @@
+- id: set_ui_theme
+  alias: "Setup: Set theme on startup"
+  trigger:
+    - event: start
+      platform: homeassistant
+  action:
+    - data:
+        name: Google - Light
+      service: frontend.set_theme

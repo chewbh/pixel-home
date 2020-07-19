@@ -1,0 +1,16 @@
+smartir:
+
+switch:
+  - platform: broadlink
+    host: 192.168.166.76
+    mac: "78:0F:77:FD:78:F6"
+
+climate:
+  - platform: smartir
+    name: Bedroom Air-Con
+    unique_id: bedroom_air_con
+    device_code: 1123
+    controller_data: 192.168.166.76
+    temperature_sensor: sensor.bedroom_air_con_temperature
+    humidity_sensor: sensor.bedroom_air_con_humidity
+    power_sensor: binary_sensor.bedroom_air_con_ac_power

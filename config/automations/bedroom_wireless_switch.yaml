@@ -1,0 +1,61 @@
+- id: "19000000001"
+  alias: "Bedroom ceiling light turn on when wireless switch (right) is pressed"
+  description: "Bedroom ceiling light turn on when wireless switch (right) is pressed"
+  trigger:
+    - event_data:
+        click_type: single
+        entity_id: binary_sensor.wall_switch_left_158d00049dec5d
+      event_type: xiaomi_aqara.click
+      platform: event
+  condition: []
+  action:
+    - entity_id: light.bedroom_ceiling_light
+      service: light.turn_on
+      data: {}
+
+- id: "19000000002"
+  alias: "Bedroom ceiling light turn off when wireless switch (right) is pressed"
+  description: "Bedroom ceiling light turn off when wireless switch (right) is pressed"
+  trigger:
+    - event_data:
+        click_type: single
+        entity_id: binary_sensor.wall_switch_right_158d00049dec5d
+      event_type: xiaomi_aqara.click
+      platform: event
+  condition: []
+  action:
+    - entity_id: light.bedroom_ceiling_light
+      service: light.turn_off
+      data: {}
+
+- id: "19000000004"
+  alias: "Bedroom ceiling light toggle when wireless switch (both) are pressed"
+  description: "Bedroom ceiling light toggle when wireless switch (both) are pressed"
+  trigger:
+    - event_data:
+        click_type: single
+        entity_id: binary_sensor.wall_switch_both_158d00049dec5d
+      event_type: xiaomi_aqara.click
+      platform: event
+  condition: []
+  action:
+    - entity_id: light.bedroom_ceiling_light
+      service: light.toggle
+      data: {}
+
+- id: "19000000003"
+  alias: "Play ghost sound when wireless switch (left) long pressed"
+  description: ""
+  trigger:
+    - event_data:
+        click_type: long
+        entity_id: binary_sensor.wall_switch_left_158d00049dec5d
+      event_type: xiaomi_aqara.click
+      platform: event
+  condition: []
+  action:
+    - data:
+        gw_mac: 04CF8CF31411
+        ringtone_id: 4
+        ringtone_vol: 8
+      service: xiaomi_aqara.play_ringtone

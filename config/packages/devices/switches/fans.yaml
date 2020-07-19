@@ -1,0 +1,52 @@
+smartir:
+
+switch:
+  - platform: broadlink
+    host: 192.168.166.76
+    mac: "78:0F:77:FD:78:F6"
+    switches:
+      kdk_bedroom_fan_power:
+        command_on: "JgBsAHNzHVYdVh0dHVYdVh1WHRwdHR0cHR0dHB1WHR0dHB1WHR0dHB0dHVYdVh1WHVYeVR0cHwAFJnZwH1QfVB8bH1QdVh1WHRwdHR0cHxsdHRxWHR0dHRxWHR0dHRwdHVYdVh1WHVYdVh0dHQANBQAAAAAAAAAAAAAAAA=="
+        command_off: "JgAOAXNyH1QeVR0cHlUeVB9UHhseHB0cHRweHB1VHhwdHB1WHhsdHB4bHlUeVR5UHlUeVR0cHgAFInVxHlQeVR4bHlUeVB9UHhwdHB4bHhseHB5UHhwdHB5VHhseGx4cHVUfVB5VHlQfVB4bHgAFI3RxH1IgVB8bHlQfVB5UHxseGx8aHxseGx9UHhsfGh9UHxofGx4bH1QeVB9UH1MfVB8bHgAFI3RxHlUeVB8bHVUeVR5UHxseGx4bHhweGx5VHRweGx5VHhseHB0cHlUeVB9UHlUdVR4bHgAFI3NyHlUdVR8bHFYfVB5VHRwdHB0dHB0dHB1WHRwdHRxWHxscHRwdHVYcVh9UHlUcVh0dHAANBQAAAAAAAAAA"
+      kdk_bedroom_fan_oscillate:
+        command_on: "JgBsAHNzHVYdVh0cHVYdVh1WHlUeHB1WHVYdVh0dHRwdHR1VHhwdHR0cHR0dVh0cHR0dHB1WHQAFKHNzHVYdVh0dHVYdVh1WHVYdHB1WHVYdVh0dHRwdHR1WHRwdHR0cHR0dVh0cHR0dHB1WHQANBQAAAAAAAAAAAAAAAA=="
+        command_off: "JgBsAHNzHVYdVh0cHVYdVh1WHlUeHB1WHVYdVh0dHRwdHR1VHhwdHR0cHR0dVh0cHR0dHB1WHQAFKHNzHVYdVh0dHVYdVh1WHVYdHB1WHVYdVh0dHRwdHR1WHRwdHR0cHR0dVh0cHR0dHB1WHQANBQAAAAAAAAAAAAAAAA=="
+
+input_text:
+  kdk_bedroom_fan_speed:
+
+fan:
+  - platform: template
+    fans:
+      kdk_bedroom_fan:
+        friendly_name: "Bedroom Fan"
+        value_template: "{{ states('switch.kdk_bedroom_fan_power') }}"
+        speed_template: "{{ states('input_text.kdk_bedroom_fan_speed') }}"
+        speeds: ["low", "med", "high"]
+        oscillating_template: >
+          {% if is_state("switch.kdk_bedroom_fan_oscillate", "on") -%}
+            True
+          {%- else -%}
+            False
+          {%- endif %}
+        turn_on:
+          - condition: state
+            entity_id: switch.kdk_bedroom_fan_power
+            state: "off"
+          - service: switch.turn_on
+            entity_id: switch.kdk_bedroom_fan_power
+        turn_off:
+          - service: switch.turn_off
+            entity_id: switch.kdk_bedroom_fan_power
+        set_oscillating:
+          service: switch.toggle
+          entity_id: switch.kdk_bedroom_fan_oscillate
+        set_speed:
+          - service: broadlink.send
+            data:
+              host: "192.168.166.76"
+              packet: "JgBsAHZwIFMgUyAaH1QfVB9UIFMgUyBTIFMgUyAaHxogGh9UHxogGh8aIBofGiAaHxogGh9UHwAFJnVxH1QfVB8bH1QfVB9UH1QfVB9UH1QfVB8bHhsfGx5VHhsfGx4bHxseGx8bHhsfGx5VHgANBQAAAAAAAAAAAAAAAA=="
+          - service: input_text.set_value
+            data_template:
+              entity_id: input_text.kdk_bedroom_fan_speed
+              value: "{{ speed }}"

@@ -1,0 +1,12 @@
+# use this to customize entities matching a pattern: https://www.home-assistant.io/docs/configuration/customizing-devices/
+# can also add data_template and service_template as per https://www.home-assistant.io/docs/automation/templating/
+
+# light.led_lights:
+#   icon: mdi:led-strip
+
+binary_sensor.internet_connection:
+  friendly_name: Internet Connection
+# light.ensuite_fan:
+#   icon: mdi:fan
+#   hidden: true
+

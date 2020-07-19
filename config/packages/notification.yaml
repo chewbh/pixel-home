@@ -1,0 +1,11 @@
+# setup telegram for notification
+telegram_bot:
+  - platform: broadcast
+    api_key: !secret notification_telegram_key
+    allowed_chat_ids:
+      - 414300462
+
+notify:
+  - name: telegram
+    platform: telegram
+    chat_id: 414300462

@@ -1,0 +1,41 @@
+# network/computer sensors and scripts
+
+wake_on_lan:
+
+## network binary sensors
+binary_sensor:
+  - name: internet_connection
+    platform: ping
+    host: 8.8.8.8 # ping google to check
+    count: 2
+    scan_interval: 30
+  # - platform: template
+  #   sensors:
+  #     # nas
+  #     nas1_status:
+  #       friendly_name: "Nas 1 Status"
+  #       value_template: >-
+  #         {{ is_state('device_tracker.nas1', 'home') }}
+  #       icon_template: >-
+  #         {% if is_state('binary_sensor.nas1_status', 'on') %}
+  #           mdi:server
+  #         {% else %}
+  #           mdi:server-off
+  #         {% endif %}
+
+asuswrt:
+  host: 192.168.50.1
+  username: !secret network_router_username
+  password: !secret network_router_password
+  port: 45505
+  # ssh_key: /config/id_rsa
+  sensors:
+    - devices
+    - upload
+    - download
+    - upload_speed
+    - download_speed
+
+speedtestdotnet:
+  scan_interval:
+    minutes: 60

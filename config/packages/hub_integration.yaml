@@ -1,0 +1,8 @@
+ifttt:
+  key: !secret ifttt_key
+
+xiaomi_aqara:
+  # define interface for broadcast discovery
+  discovery_retry: 5
+  gateways:
+    - key: !secret gateway_xiaomi_key

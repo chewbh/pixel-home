@@ -1,0 +1,7 @@
+"sensor.*_temperature":
+  unit_of_measurement: C
+  icon: mdi:thermometer
+
+"sensor.*_battery":
+  unit_of_measurement: "%"
+  icon: mdi:battery

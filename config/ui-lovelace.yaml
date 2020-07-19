@@ -1,0 +1,106 @@
+title: Woodlands Circle
+views:
+  - badges:
+      - entity: person.boon_heng
+      - entity: person.chew_teng_soon
+      - entity: person.salina
+      - entity: person.irene_chew
+    cards:
+      - entity: weather.woodlands_circle
+        theme: Google - Dark
+        type: weather-forecast
+      - cards:
+          - entities:
+              - entity: binary_sensor.internet_connection
+            type: entities
+          - cards:
+              - entity: sensor.asuswrt_download_speed
+                name: "Router Speed - Download "
+                type: gauge
+              - entity: sensor.asuswrt_upload_speed
+                name: Router Speed - Upload
+                type: gauge
+              - entity: sensor.speedtest_download
+                max: 800
+                min: 0
+                name: Internet Speed - Download
+                severity:
+                  green: 300
+                  red: 0
+                  yellow: 0
+                type: gauge
+              - entity: sensor.speedtest_upload
+                max: 800
+                min: 0
+                name: Internet Speed - Upload
+                severity:
+                  green: 200
+                  red: 0
+                  yellow: 0
+                type: gauge
+            type: horizontal-stack
+        type: vertical-stack
+    icon: "mdi:castle"
+    panel: false
+    path: home
+    theme: Google - Light
+    title: Home
+  - badges: []
+    cards:
+      - cards:
+          - camera_image: camera.kitchen_camera
+            camera_view: live
+            entity: camera.kitchen_camera
+            image: "https://demo.home-assistant.io/stub_config/bedroom.png"
+            name: Kitchen
+            type: picture-entity
+          - aspect_ratio: 0%
+            camera_image: camera.parent_bedroom_camera
+            camera_view: live
+            entity: camera.parent_bedroom_camera
+            image: "https://demo.home-assistant.io/stub_config/bedroom.png"
+            name: Parent Bedroom
+            type: picture-entity
+        type: vertical-stack
+    icon: "mdi:cctv"
+    path: security
+    title: Security
+  - icon: "mdi:bed-empty"
+    panel: false
+    theme: Google - Light
+    title: Boon Heng's Bedroom
+    visible:
+      - user: 0785cf674ddd4bf68507c8ea101d132e
+      - user: a61c2496fd7441798150fee7904fbb86
+      - user: 9e10e397d9414c68968a61db29646e87
+      - user: 59349e75a37144bd999b45132e25a6ca
+    badges: []
+    cards:
+      - type: entities
+        title: Lights
+        entities:
+          - entity: light.bedroom_ceiling_light
+          - entity: light.gateway_light_04cf8cf31411
+      - cards:
+          - entity: light.bedroom_ceiling_light
+            type: light
+          - entity: light.gateway_light_04cf8cf31411
+            name: Bedroom Table Light
+            type: light
+        type: horizontal-stack
+      - type: horizontal-stack
+        cards:
+          - entities:
+              - entity: fan.kdk_bedroom_fan
+              - entity: climate.bedroom_air_con
+            show_header_toggle: false
+            title: Cooling
+            type: entities
+          - entity: climate.bedroom_air_con
+            type: thermostat
+  - title: Explore
+    path: explore
+    visible:
+      - user: 0785cf674ddd4bf68507c8ea101d132e
+    badges: []
+    cards: []

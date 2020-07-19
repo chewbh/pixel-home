@@ -1,0 +1,12 @@
+sensor:
+  - platform: command_line
+    name: Sengkang Rainfall
+    command: "python3 /config/python_scripts/get_rainfall.py S220"
+    unit_of_measurement: mm
+    scan_interval: 300
+
+  - platform: command_line
+    name: Woodlands Circle Rainfall
+    command: "python3 /config/python_scripts/get_rainfall.py S227"
+    unit_of_measurement: mm
+    scan_interval: 300

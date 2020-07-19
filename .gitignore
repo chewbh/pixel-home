@@ -1,0 +1,44 @@
+*.pid
+*.xml
+*.csr
+*.crt
+*.key
+*.pem
+*.old
+*.json
+
+.ip_authenticated.yaml
+appdaemon/appdaemon.yaml
+appdaemon/*.log*
+
+home-assistant.log
+home-assistant_v2.db
+home-assistant_v2.db-shm
+home-assistant_v2.db-wal
+
+# whitelist configuration files and readme
+!*.yaml
+!.gitignore
+!*.md
+
+# ignore yaml files with secrets and sensitive data
+ip_bans.yaml
+secrets.yaml
+known_devices.yaml
+
+# ignore files
+.storage
+.Trash-0
+*.config_entries
+*.tmp
+
+.spotify-token-cache
+.uuid
+.stignore
+.vscode
+
+# ignore folders.
+.storage
+.cloud
+.google.token
+custom_deps/

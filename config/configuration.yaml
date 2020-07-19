@@ -1,0 +1,62 @@
+# https://www.home-assistant.io/docs/configuration/basic/
+
+homeassistant:
+  name: Woodlands Area (PixelHome)
+  latitude: !secret home_latitude
+  longitude: !secret home_longitude
+  elevation: !secret home_elevation
+  unit_system: metric
+  time_zone: Asia/Singapore
+  external_url: !secret external_url
+
+  # customization
+  customize: !include customize.yaml
+  customize_domain: {}
+  customize_glob: !include customize_glob.yaml
+
+  # include packages
+  packages: !include_dir_named packages
+
+# enable default home assistant components
+default_config:
+
+# enable person component
+person:
+
+# enable system health
+system_health:
+
+# don't check for update directly
+updater:
+  reporting: false
+
+frontend:
+  themes: !include_dir_merge_named themes
+
+automation: !include_dir_merge_list automations
+script: !include_dir_merge_list scripts
+
+# scene: !include scenes.yaml
+
+# leverage on smartIR component
+smartir:
+
+# panel_custom:
+#   # Floorplan Panel
+#   - name: floorplan
+#     sidebar_title: Floorplan
+#     sidebar_icon: mdi:home
+#     url_path: floorplan
+#     config: !include floorplan.yaml
+# mdi:security-home
+
+# Text to speech
+tts:
+  - platform: google_translate
+
+logbook:
+  exclude:
+    entities:
+      - automation.setup_set_theme_on_startup
+
+logger: !include logger.yaml

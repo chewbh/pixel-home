@@ -1,0 +1,13 @@
+camera:
+  - platform: mjpeg
+    name: Parent Bedroom Camera
+    still_image_url: http://192.168.89.222/image/jpeg.cgi
+    mjpeg_url: http://192.168.89.222/video/mjpg.cgi
+    username: !secret camera_parent_bedroom_username
+    password: !secret camera_parent_bedroom_password
+  - platform: mjpeg
+    name: Kitchen Camera
+    still_image_url: http://192.168.144.24/image/jpeg.cgi
+    mjpeg_url: http://192.168.144.24/video/mjpg.cgi
+    username: !secret camera_kitchen_username
+    password: !secret camera_kitchen_password

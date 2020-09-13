@@ -1,0 +1,164 @@
+# Mama Bedroom Wireless Switch Setup
+- id: "19000000001"
+  alias: "alternate_mama_bedroom_light_switch"
+  description: "Alternate Switch for Mama Bedroom Fan Light"
+  trigger:
+    - event_data:
+        click_type: single
+        entity_id: binary_sensor.wall_switch_left_158d00049deccb
+      event_type: xiaomi_aqara.click
+      platform: event
+  condition: []
+  action:
+    - entity_id: light.mama_bedroom_ceiling_fan_light
+      service: light.toggle
+      data: {}
+
+- id: "19000000002"
+  alias: "alternate_mama_bedroom_fan_switch"
+  description: "Alternate Switch for Mama Bedroom Fan"
+  trigger:
+    - event_data:
+        click_type: single
+        entity_id: binary_sensor.wall_switch_right_158d00049deccb
+      event_type: xiaomi_aqara.click
+      platform: event
+  condition: []
+  action:
+    - entity_id: fan.mama_bedroom_fan
+      service: fan.toggle
+      data: {}
+
+# Living Room / Walkway Wireless Switch Setup
+- id: "19000000021"
+  alias: "alternate_living_room_back_light_switch"
+  description: "Alternate Switch for Living Room Back Light Switch"
+  trigger:
+    - event_data:
+        click_type: single
+        entity_id: binary_sensor.wall_switch_left_158d00049dec74
+      event_type: xiaomi_aqara.click
+      platform: event
+  condition: []
+  action:
+    - entity_id: light.back_light
+      service: light.toggle
+      data: {}
+
+- id: "19000000022"
+  alias: "alternate_living_room_front_light_switch"
+  description: "Alternate Switch for Living Room Front Light Switch"
+  trigger:
+    - event_data:
+        click_type: single
+        entity_id: binary_sensor.wall_switch_right_158d00049dec74
+      event_type: xiaomi_aqara.click
+      platform: event
+  condition: []
+  action:
+    - entity_id: light.front_light
+      service: light.toggle
+      data: {}
+
+# - id: "19000000023"
+#   alias: "alternate_living_room_fan_switch"
+#   description: "Alternate Switch for Living Room Fan Switch"
+#   trigger:
+#     - event_data:
+#         click_type: single
+#         entity_id: binary_sensor.wall_switch_both_158d00049dec74
+#       event_type: xiaomi_aqara.click
+#       platform: event
+#   condition: []
+#   action:
+#     - entity_id: fan.front_light
+#       service: fan.toggle
+#       data: {}
+
+# Papa Bedroom Wireless Switch Setup
+- id: "19000000011"
+  alias: "alternate_papa_bedroom_bedside_light_switch"
+  description: "Alternate Switch for Papa Bedroom Bedside Light Switch"
+  trigger:
+    - event_data:
+        click_type: single
+        entity_id: binary_sensor.wall_switch_left_158d00049dec5d
+      event_type: xiaomi_aqara.click
+      platform: event
+  condition: []
+  action:
+    - entity_id: light.gateway_light_04cf8cf31411
+      service: light.toggle
+      data: {}
+
+# motion sensor in bathroom (master bathroom)
+- id: "19000000031"
+  alias: bathroom_night_light_on
+  trigger:
+    platform: state
+    entity_id: binary_sensor.motion_sensor_158d00036bef62
+    from: "off"
+    to: "on"
+  condition:
+    - condition: time
+      after: "16:00:00"
+      before: "7:00:00"
+  action:
+    - service: light.turn_on
+      entity_id: light.master_bathroom_light
+    - service: automation.turn_on
+      data:
+        entity_id: automation.bathroom_night_light_off_aft_1min
+
+- id: "19000000032"
+  alias: bathroom_night_light_off_aft_1min
+  initial_state: false
+  trigger:
+    platform: state
+    entity_id: binary_sensor.motion_sensor_158d00036bef62
+    from: "on"
+    to: "off"
+    for:
+      seconds: 10
+  action:
+    - service: light.turn_off
+      entity_id: light.master_bathroom_light
+    - service: automation.turn_off
+      data:
+        entity_id: automation.bathroom_night_light_off_aft_1min
+
+# motion sensor in bathroom (common bathroom)
+- id: "19000000041"
+  alias: common_bathroom_night_light_on
+  trigger:
+    platform: state
+    entity_id: binary_sensor.motion_sensor_158d00033aabc7
+    from: "off"
+    to: "on"
+  condition:
+    - condition: time
+      after: "16:00:00"
+      before: "7:00:00"
+  action:
+    - service: light.turn_on
+      entity_id: light.common_bathroom_light
+    - service: automation.turn_on
+      data:
+        entity_id: automation.common_bathroom_night_light_off_aft_1min
+
+- id: "19000000042"
+  alias: common_bathroom_night_light_off_aft_1min
+  initial_state: false
+  trigger:
+    platform: state
+    entity_id: binary_sensor.motion_sensor_158d00033aabc7
+    from: "on"
+    to: "off"
+    for:
+      seconds: 10
+  action:
+    - service: light.turn_off
+      entity_id: light.common_bathroom_light
+    - service: automation.turn_off
+      data:
+        entity_id: automation.common_bathroom_night_light_off_aft_1min

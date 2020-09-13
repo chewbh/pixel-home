@@ -1,0 +1,6 @@
+panel_iframe:
+  configurator:
+    title: Configurator
+    url: "https://hass-configurator.app.boonheng.sg"
+    icon: mdi:wrench
+    require_admin: true

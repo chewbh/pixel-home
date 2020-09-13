@@ -1,16 +1,62 @@
 smartir:
 
 switch:
+  # master bedroom
   - platform: broadlink
-    host: 192.168.166.76
+    host: 192.168.169.52
+    mac: "24:DF:A7:34:8F:51"
+    type: rm4_mini
+
+  # papa bedroom
+  - platform: broadlink
+    host: 192.168.204.238
+    mac: "24:DF:A7:34:AB:C1"
+    type: rm4_mini
+
+  # mama bedroom
+  - platform: broadlink
+    host: 192.168.174.186
+    mac: "24:DF:A7:E8:3E:56"
+    type: rm4_mini
+
+  # RM3 Pro+
+  - platform: broadlink
+    host: 192.168.24.128
     mac: "78:0F:77:FD:78:F6"
 
 climate:
   - platform: smartir
-    name: Bedroom Air-Con
-    unique_id: bedroom_air_con
-    device_code: 1123
-    controller_data: 192.168.166.76
-    temperature_sensor: sensor.bedroom_air_con_temperature
-    humidity_sensor: sensor.bedroom_air_con_humidity
-    power_sensor: binary_sensor.bedroom_air_con_ac_power
+    name: Master Bedroom Air-Con
+    unique_id: master_bedroom_air_con
+    device_code: 1119
+    controller_data: 192.168.169.52
+    temperature_sensor: sensor.master_bedroom_air_con_temperature
+    humidity_sensor: sensor.master_bedroom_air_con_humidity
+    power_sensor: binary_sensor.master_bedroom_air_con_ac_power
+
+  - platform: smartir
+    name: Papa Bedroom Air-Con
+    unique_id: papa_bedroom_air_con
+    device_code: 1119
+    controller_data: 192.168.204.238
+    temperature_sensor: sensor.papa_bedroom_air_con_temperature
+    humidity_sensor: sensor.papa_bedroom_air_con_humidity
+    power_sensor: binary_sensor.papa_bedroom_air_con_ac_power
+
+  - platform: smartir
+    name: Mama Bedroom Air-Con
+    unique_id: mama_bedroom_air_con
+    device_code: 1119
+    controller_data: 192.168.174.186
+    temperature_sensor: sensor.mama_bedroom_air_con_temperature
+    humidity_sensor: sensor.mama_bedroom_air_con_humidity
+    power_sensor: binary_sensor.mama_bedroom_air_con_ac_power
+
+  - platform: smartir
+    name: Living Room Air-Con
+    unique_id: living_room_air_con
+    device_code: 1119
+    controller_data: 192.168.24.128
+    temperature_sensor: sensor.living_room_air_con_temperature
+    humidity_sensor: sensor.living_room_air_con_humidity
+    power_sensor: binary_sensor.living_room_air_con_ac_power

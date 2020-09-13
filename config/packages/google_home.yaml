@@ -7,8 +7,6 @@ google_assistant:
   # - alarm_control_panel
   # - camera
   # - group
-  # - input_boolean
-  # - input_select
   # - scene
   # - script
   # - switch
@@ -21,14 +19,75 @@ google_assistant:
   # - vacuum
   # - sensor
   entity_config:
+    # camera
+    camera.living_room_camera_mainstream:
+      name: Living Room Camera
+      expose: true
+    # cover
+    cover.master_bedroom_left_blind:
+      name: Master Bedroom Left Blind
+      expose: true
+    cover.master_bedroom_right_blind:
+      name: Master Bedroom Right Blind
+      expose: true
+    # air-con / climate
+    climate.living_room_air_con:
+      name: Living Room Air Con
+      expose: true
+    climate.master_bedroom_air_con:
+      name: Master Bedroom Air Con
+      expose: true
+    climate.papa_bedroom_air_con:
+      name: Papa Bedroom Air Con
+      expose: true
+    climate.mama_bedroom_air_con:
+      name: Mama Bedroom Air Con
+      expose: true
+    # fan
+    fan.balcony_fan:
+      name: Balcony Fan
+      expose: true
+    fan.papa_bedroom_fan:
+      name: Papa Bedroom Fan
+      expose: true
+    fan.mama_bedroom_fan:
+      name: Mama Bedroom Fan
+      expose: true
+    # fan light
+    light.balcony_ceiling_fan_light:
+      name: Balcony Fan Light
+      expose: true
+    light.papa_bedroom_ceiling_fan_light:
+      name: Papa Bedroom Fan Light
+      expose: true
+    light.mama_bedroom_ceiling_fan_light:
+      name: Mama Bedroom Fan Light
+      expose: true
+    # xiaomi lights
     light.gateway_light_04cf8cf31411:
-      name: Bedroom Night Light
-      aliases:
-        - GATEWAY_LIGHT
+      name: Papa Bedside Light
       expose: true
-    fan.kdk_bedroom_fan:
-      name: Bedroom Fan
+    light.back_light:
+      name: Back Light
       expose: true
-    climate.bedroom_air_con:
-      name: Air Con
+    light.front_light:
+      name: Front Light
+      expose: true
+    light.kitchen_light:
+      name: Kitchen Light
+      expose: true
+    light.entrance_light:
+      name: Entrance Light
+      expose: true
+    light.walkway_light:
+      name: Walkway Light
+      expose: true
+    light.common_bathroom_light:
+      name: Common Bathroom Light
+      expose: true
+    light.master_bathroom_light:
+      name: Master Bathroom Light
+      expose: true
+    light.master_bedroom_led_light:
+      name: Master Bedroom LED Light
       expose: true

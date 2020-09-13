@@ -1,7 +1,7 @@
 # https://www.home-assistant.io/docs/configuration/basic/
 
 homeassistant:
-  name: Woodlands Area (PixelHome)
+  name: !secret home_name
   latitude: !secret home_latitude
   longitude: !secret home_longitude
   elevation: !secret home_elevation
@@ -33,7 +33,7 @@ updater:
 frontend:
   themes: !include_dir_merge_named themes
 
-automation: !include_dir_merge_list automations
+automation: !include automations.yaml
 script: !include_dir_merge_list scripts
 
 # scene: !include scenes.yaml
@@ -55,8 +55,8 @@ tts:
   - platform: google_translate
 
 logbook:
-  exclude:
-    entities:
-      - automation.setup_set_theme_on_startup
+  # exclude:
+  #   entities:
+  #     - automation.setup_set_theme_on_startup
 
 logger: !include logger.yaml

@@ -1,52 +1,159 @@
-smartir:
+# mama's bedroom fan & light
+input_boolean:
+  bl_mama_bedroom_fan:
+  bl_mama_bedroom_ceiling_fan_light:
 
-switch:
-  - platform: broadlink
-    host: 192.168.166.76
-    mac: "78:0F:77:FD:78:F6"
-    switches:
-      kdk_bedroom_fan_power:
-        command_on: "JgBsAHNzHVYdVh0dHVYdVh1WHRwdHR0cHR0dHB1WHR0dHB1WHR0dHB0dHVYdVh1WHVYeVR0cHwAFJnZwH1QfVB8bH1QdVh1WHRwdHR0cHxsdHRxWHR0dHRxWHR0dHRwdHVYdVh1WHVYdVh0dHQANBQAAAAAAAAAAAAAAAA=="
-        command_off: "JgAOAXNyH1QeVR0cHlUeVB9UHhseHB0cHRweHB1VHhwdHB1WHhsdHB4bHlUeVR5UHlUeVR0cHgAFInVxHlQeVR4bHlUeVB9UHhwdHB4bHhseHB5UHhwdHB5VHhseGx4cHVUfVB5VHlQfVB4bHgAFI3RxH1IgVB8bHlQfVB5UHxseGx8aHxseGx9UHhsfGh9UHxofGx4bH1QeVB9UH1MfVB8bHgAFI3RxHlUeVB8bHVUeVR5UHxseGx4bHhweGx5VHRweGx5VHhseHB0cHlUeVB9UHlUdVR4bHgAFI3NyHlUdVR8bHFYfVB5VHRwdHB0dHB0dHB1WHRwdHRxWHxscHRwdHVYcVh9UHlUcVh0dHAANBQAAAAAAAAAA"
-      kdk_bedroom_fan_oscillate:
-        command_on: "JgBsAHNzHVYdVh0cHVYdVh1WHlUeHB1WHVYdVh0dHRwdHR1VHhwdHR0cHR0dVh0cHR0dHB1WHQAFKHNzHVYdVh0dHVYdVh1WHVYdHB1WHVYdVh0dHRwdHR1WHRwdHR0cHR0dVh0cHR0dHB1WHQANBQAAAAAAAAAAAAAAAA=="
-        command_off: "JgBsAHNzHVYdVh0cHVYdVh1WHlUeHB1WHVYdVh0dHRwdHR1VHhwdHR0cHR0dVh0cHR0dHB1WHQAFKHNzHVYdVh0dHVYdVh1WHVYdHB1WHVYdVh0dHRwdHR1WHRwdHR0cHR0dVh0cHR0dHB1WHQANBQAAAAAAAAAAAAAAAA=="
-
-input_text:
-  kdk_bedroom_fan_speed:
+script:
+  mama_bedroom_fan_on:
+    sequence:
+      - service: input_boolean.turn_on
+        data:
+          entity_id: input_boolean.bl_mama_bedroom_fan
+      - service: broadlink.send
+        data_template:
+          host: 192.168.24.128
+          packet: >-
+            {% if is_state('input_boolean.bl_mama_bedroom_ceiling_fan_light', 'on') %}
+              "ZABwABcYCxkKDhYNFw0WDRcYCw0WAAE7Cg0WDhYOFg0WGQsZCg4WDRYNFw0WDhYNFg4WGQsZCg0WDhYNFw0WGQoOFgABOgsNFg0XDRcMFxkLGAsNFg0XDRYOFg0XDRYNFxkKGQoNFw0XDRYNFxgLDRcABdwAAAAAAAAAAA=="
+            {% else %}
+              "ZBEuAAwNFw4XDRcOFxkLGQsOFw4XDhcOFw4XDhcNFw4XGQsOFw4XGQwZDBkMDRcAAUsAAAAAAAAAAAAA"
+            {% endif %}
+  mama_bedroom_fan_off:
+    sequence:
+      - service: input_boolean.turn_off
+        data:
+          entity_id: input_boolean.bl_mama_bedroom_fan
+      - service: broadlink.send
+        data_template:
+          host: 192.168.24.128
+          packet: >-
+            {% if is_state('input_boolean.bl_mama_bedroom_ceiling_fan_light', 'on') %}
+              "ZDIuAAsNFw4XDRcOFxkMGQsNFw4XDRcNFw4XDhcNFxkMDhcNFw0XDhcNGA0XDRcAATsAAAAAAAAAAAAA"
+            {% else %}
+              "ZEwuAAsNFw0YDRcNFxkLGQsNFw0XDhcNGA0XDhcNFw0XDhcOFw0XGQwZDA0XDhcAATsAAAAAAAAAAAAA"
+            {% endif %}
+  mama_bedroom_fan_light_on:
+    sequence:
+      - service: input_boolean.turn_on
+        data:
+          entity_id: input_boolean.bl_mama_bedroom_ceiling_fan_light
+      - service: broadlink.send
+        data_template:
+          host: 192.168.24.128
+          packet: >-
+            {% if is_state('input_boolean.bl_mama_bedroom_fan', 'on') %}
+              "ZABwABcYCxkKDhYNFw0WDRcYCw0WAAE7Cg0WDhYOFg0WGQsZCg4WDRYNFw0WDhYNFg4WGQsZCg0WDhYNFw0WGQoOFgABOgsNFg0XDRcMFxkLGAsNFg0XDRYOFg0XDRYNFxkKGQoNFw0XDRYNFxgLDRcABdwAAAAAAAAAAA=="
+            {% else %}
+              "ZDIuAAsNFw4XDRcOFxkMGQsNFw4XDRcNFw4XDhcNFxkMDhcNFw0XDhcNGA0XDRcAATsAAAAAAAAAAAAA"
+            {% endif %}
+  mama_bedroom_fan_light_off:
+    sequence:
+      - service: input_boolean.turn_off
+        data:
+          entity_id: input_boolean.bl_mama_bedroom_ceiling_fan_light
+      - service: broadlink.send
+        data_template:
+          host: 192.168.24.128
+          packet: >-
+            {% if is_state('input_boolean.bl_mama_bedroom_fan', 'on') %}
+              "ZBEuAAwNFw4XDRcOFxkLGQsOFw4XDhcOFw4XDhcNFw4XGQsOFw4XGQwZDBkMDRcAAUsAAAAAAAAAAAAA"
+            {% else %}
+              "ZEwuAAsNFw0YDRcNFxkLGQsNFw0XDhcNGA0XDhcNFw0XDhcOFw0XGQwZDA0XDhcAATsAAAAAAAAAAAAA"
+            {% endif %}
 
 fan:
+  # mama's bedroom fan
   - platform: template
     fans:
-      kdk_bedroom_fan:
-        friendly_name: "Bedroom Fan"
-        value_template: "{{ states('switch.kdk_bedroom_fan_power') }}"
-        speed_template: "{{ states('input_text.kdk_bedroom_fan_speed') }}"
-        speeds: ["low", "med", "high"]
-        oscillating_template: >
-          {% if is_state("switch.kdk_bedroom_fan_oscillate", "on") -%}
-            True
-          {%- else -%}
-            False
-          {%- endif %}
+      mama_bedroom_fan:
+        friendly_name: "Bedroom fan"
+        value_template: "{{ states('input_boolean.bl_mama_bedroom_fan') }}"
         turn_on:
-          - condition: state
-            entity_id: switch.kdk_bedroom_fan_power
-            state: "off"
-          - service: switch.turn_on
-            entity_id: switch.kdk_bedroom_fan_power
+          service: script.mama_bedroom_fan_on
         turn_off:
-          - service: switch.turn_off
-            entity_id: switch.kdk_bedroom_fan_power
-        set_oscillating:
-          service: switch.toggle
-          entity_id: switch.kdk_bedroom_fan_oscillate
-        set_speed:
-          - service: broadlink.send
-            data:
-              host: "192.168.166.76"
-              packet: "JgBsAHZwIFMgUyAaH1QfVB9UIFMgUyBTIFMgUyAaHxogGh9UHxogGh8aIBofGiAaHxogGh9UHwAFJnVxH1QfVB8bH1QfVB9UH1QfVB9UH1QfVB8bHhsfGx5VHhsfGx4bHxseGx8bHhsfGx5VHgANBQAAAAAAAAAAAAAAAA=="
-          - service: input_text.set_value
-            data_template:
-              entity_id: input_text.kdk_bedroom_fan_speed
-              value: "{{ speed }}"
+          service: script.mama_bedroom_fan_off
+        speeds:
+          - "med"
+
+  # papa's bedroom fan
+  - platform: smartir
+    name: Papa Bedroom Fan
+    unique_id: papa_bedroom_fan
+    device_code: 3002
+    controller_data: 192.168.24.128
+    power_sensor: binary_sensor.papa_bedroom_fan_power
+
+  # living room fan
+  - platform: smartir
+    name: Living Room Fan
+    unique_id: living_room_fan
+    device_code: 3003
+    controller_data: 192.168.24.128
+    power_sensor: binary_sensor.living_room_fan_power
+
+  # balcony fan
+  - platform: smartir
+    name: Balcony Fan
+    unique_id: balcony_fan
+    device_code: 3001
+    controller_data: 192.168.24.128
+    power_sensor: binary_sensor.balcony_fan_power
+
+    # master bedroom fan
+  - platform: smartir
+    name: Master Bedroom Fan
+    unique_id: master_bedroom_fan
+    device_code: 3004
+    controller_data: 192.168.24.128
+    power_sensor: binary_sensor.master_bedroom_fan_power
+
+# switches for fan light via RF control
+switch:
+  - platform: broadlink
+    host: 192.168.24.128
+    mac: "78:0F:77:FD:78:F6"
+    switches:
+      bl_living_room_ceiling_fan_light_switch:
+        command_on: "sgCgAAsdCh0LHR4KCh0LHR0KHgoKHR4KCh0eCgqSCh0LHQodCh4eCQsdCxwLHQscCx0LHQodHgoKHQscCx0LHR4JCx0KHQsdCh4KHR4KCh0LHR4JHgoKHR4KCh0eCguSCh0LHQscCx0eCQsdCxwLHQsdCh0LHQodHgoLHAsdCh0LHR4JCx0LHQodCx0KHR4KCxwLHR4KHQoLHB8JCxweCgsABdwAAAAAAAAAAA=="
+        command_off: "sgCgAAsdCh0LHR4KCh0LHR0KHgoKHR4KCh0eCgqSCh0LHQodCh4eCQsdCxwLHQscCx0LHQodHgoKHQscCx0LHR4JCx0KHQsdCh4KHR4KCh0LHR4JHgoKHR4KCh0eCguSCh0LHQscCx0eCQsdCxwLHQsdCh0LHQodHgoLHAsdCh0LHR4JCx0LHQodCx0KHR4KCxwLHR4KHQoLHB8JCxweCgsABdwAAAAAAAAAAA=="
+      bl_balcony_ceiling_fan_light_switch:
+        command_on: "sgBMAQoeCh0LHgodHgoKHgoeCh4KHgoeCh0LHR4KCh4KHgoeCh4dCh4KHgoeCgoeCh4eCgoeHQsdCgsdHgoeCgoeHgoKkwoeCh4KHQsdHgoKHgoeCh4KHgoeCh0LHR4KCh4KHgoeCh4dCx0KHgoeCgoeCh4eCgoeHQsdCwodHgoeCgoeHgoKkwoeCh4KHgodHgoKHgoeCh4KHgoeCh4KHR4KCx0KHgoeCh4eCh4KHQoeCgoeCh4eCgoeHQsdCwodHgsdCgoeHgoKlAsdCh4KHgoeHQoLHQoeCh4KHgoeCh4KHh0LCR4LHQoeCh4eCh4KHQsdCwodCx0eCgoeHgoeCgoeHQsdCgsdHgoKlQoeCR4KHgoeHQsKHgodCx0LHQoeCh4KHh0LCh4KHgodCx0eCh4KHgodCwoeCh0eCwoeHQoeCgoeHgoeCgoeHQsJAAXcAAAAAAAAAAAAAAAA"
+        command_off: "sgBMAQoeCh0LHgodHgoKHgoeCh4KHgoeCh0LHR4KCh4KHgoeCh4dCh4KHgoeCgoeCh4eCgoeHQsdCgsdHgoeCgoeHgoKkwoeCh4KHQsdHgoKHgoeCh4KHgoeCh0LHR4KCh4KHgoeCh4dCx0KHgoeCgoeCh4eCgoeHQsdCwodHgoeCgoeHgoKkwoeCh4KHgodHgoKHgoeCh4KHgoeCh4KHR4KCx0KHgoeCh4eCh4KHQoeCgoeCh4eCgoeHQsdCwodHgsdCgoeHgoKlAsdCh4KHgoeHQoLHQoeCh4KHgoeCh4KHh0LCR4LHQoeCh4eCh4KHQsdCwodCx0eCgoeHgoeCgoeHQsdCgsdHgoKlQoeCR4KHgoeHQsKHgodCx0LHQoeCh4KHh0LCh4KHgodCx0eCh4KHgodCwoeCh0eCwoeHQoeCgoeHgoeCgoeHQsJAAXcAAAAAAAAAAAAAAAA"
+      bl_papa_bedroom_ceiling_fan_light_switch:
+        command_on: "sgAMARkIGQgZCBoHGggZCAgYCRcaCBkICBgIGBoIGQgIGAgYGQgaCAgYCBgJGAgYGQgZCAn0GQgZCBoIGQgZCBoICBgJFxkIGggIGAkXGggZCAkYCBgZCBoICBgIGAkYCBgZCBkICfUZCBkIGQgaCBkIGggIGAkXGggZCAkYCBgZCRkICBgJGBkIGQkIGAgYCRgIGBkIGggI9RkIGggZCBoHGggaBwkYCRgZCBkJCBgJGBkIGQgJGAgYGQkZCAkYCBgIGAkXGggZCAn1GQkZCBkIGggZCBoICRgIGBoIGQgJGAgYGQgaCAkYCBgZCBoICRgIGAgYCRgZCBoICPYZCBkIGggaCBkIGggIGAkABdwAAAAAAAAAAAAAAAA="
+        command_off: "sgAMARkIGQgZCBoHGggZCAgYCRcaCBkICBgIGBoIGQgIGAgYGQgaCAgYCBgJGAgYGQgZCAn0GQgZCBoIGQgZCBoICBgJFxkIGggIGAkXGggZCAkYCBgZCBoICBgIGAkYCBgZCBkICfUZCBkIGQgaCBkIGggIGAkXGggZCAkYCBgZCRkICBgJGBkIGQkIGAgYCRgIGBkIGggI9RkIGggZCBoHGggaBwkYCRgZCBkJCBgJGBkIGQgJGAgYGQkZCAkYCBgIGAkXGggZCAn1GQkZCBkIGggZCBoICRgIGBoIGQgJGAgYGQgaCAkYCBgZCBoICRgIGAgYCRgZCBoICPYZCBkIGggaCBkIGggIGAkABdwAAAAAAAAAAAAAAAA="
+      bl_master_bedroom_ceiling_fan_light_switch:
+        command_on: "sgBKAQoeCh0KHR4KCxwLHQoeCh0LHQodCx0dCgsdCh0LHQodHgoeCgodCh4KHR4KHQoLHR0KCx0dCh4KHQoeCgodC5ELHQodCx0KHR4KCh0LHQodCx0LHAsdCh0eCgoeCh0KHgodHgodCgoeCh0LHR0KHgoLHB4KCh0eCh4KHQoeCQsdCpIKHQsdCh0LHR4JCx0KHQsdCh4KHQscCx0eCgodCh4KHQsdHQoeCgoeCh0KHR4KHQsKHR4JCx0eCh0KHgodCgsdCpIKHQodCx0KHh0KCh4KHQsdCh0LHQodCh4dCgsdCh0LHQodHgoeCgodCh4KHR4JHgoLHR4JCx0dCh4KHQoeCgodC5ILHQodCx0KHR4KCh0LHQodCx0KHQsdCh0eCgoeCh0LHQodHgoeCQsdCh0LHR0KHgoLHR0KCx0dCh4KHQoeCgodCwAF3AAAAAAAAAAAAAAAAAAA"
+        command_off: "sgBKAQoeCh0KHR4KCxwLHQoeCh0LHQodCx0dCgsdCh0LHQodHgoeCgodCh4KHR4KHQoLHR0KCx0dCh4KHQoeCgodC5ELHQodCx0KHR4KCh0LHQodCx0LHAsdCh0eCgoeCh0KHgodHgodCgoeCh0LHR0KHgoLHB4KCh0eCh4KHQoeCQsdCpIKHQsdCh0LHR4JCx0KHQsdCh4KHQscCx0eCgodCh4KHQsdHQoeCgoeCh0KHR4KHQsKHR4JCx0eCh0KHgodCgsdCpIKHQodCx0KHh0KCh4KHQsdCh0LHQodCh4dCgsdCh0LHQodHgoeCgodCh4KHR4JHgoLHR4JCx0dCh4KHQoeCgodC5ILHQodCx0KHR4KCh0LHQodCx0KHQsdCh0eCgoeCh0LHQodHgoeCQsdCh0LHR0KHgoLHR0KCx0dCh4KHQoeCgodCwAF3AAAAAAAAAAAAAAAAAAA"
+
+light:
+  - platform: template
+    lights:
+      # mama's bedroom fan light
+      mama_bedroom_ceiling_fan_light:
+        friendly_name: Mama Bedroom Ceiling Fan Light
+        value_template: "{{ states('input_boolean.bl_mama_bedroom_ceiling_fan_light') }}"
+        turn_on:
+          service: script.mama_bedroom_fan_light_on
+        turn_off:
+          service: script.mama_bedroom_fan_light_off
+
+  # papa's bedroom fan light
+  - platform: switch
+    name: Papa Bedroom Ceiling Fan Light
+    entity_id: switch.bl_papa_bedroom_ceiling_fan_light_switch
+
+  # living room fan light
+  - platform: switch
+    name: Living Room Ceiling Fan Light
+    entity_id: switch.bl_balcony_ceiling_fan_light_switch
+
+  # master bedroom fan light
+  - platform: switch
+    name: Master Bedroom Ceiling Fan Light
+    entity_id: switch.bl_master_bedroom_ceiling_fan_light_switch
+
+  # balcony fan light
+  - platform: switch
+    name: Balcony Ceiling Fan Light
+    entity_id: switch.bl_balcony_ceiling_fan_light_switch

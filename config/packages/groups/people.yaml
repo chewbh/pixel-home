@@ -1,7 +1,6 @@
 group:
   Family:
     entities:
-      - person.boon_heng
+      - person.chew_boon_heng
       - person.chew_teng_soon
       - person.salina
-      - person.irene_chew

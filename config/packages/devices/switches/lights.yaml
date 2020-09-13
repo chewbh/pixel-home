@@ -1,0 +1,135 @@
+# input_boolean:
+#   bl_entrance_light_switch_power:
+#   bl_walkway_light_switch_power:
+#   bl_master_bedroom_led_light_switch_power:
+#   bl_master_bathroom_light_switch_power:
+#   bl_front_track_light_switch_power:
+#   bl_back_track_light_switch_power:
+
+# switch:
+# - platform: template
+#   switches:
+#     bl_front_track_light_switch:
+#       value_template: "{{ states('input_boolean.bl_front_track_light_switch_power') }}"
+#       turn_on:
+#         - service: ifttt.trigger
+#           data:
+#             event: front_track_light_on
+#         - service: input_boolean.turn_on
+#           data:
+#             entity_id: input_boolean.bl_front_track_light_switch_power
+#       turn_off:
+#         - service: ifttt.trigger
+#           data:
+#             event: front_track_light_off
+#         - service: input_boolean.turn_off
+#           data:
+#             entity_id: input_boolean.bl_front_track_light_switch_power
+#     bl_back_track_light_switch:
+#       value_template: "{{ states('input_boolean.bl_back_track_light_switch_power') }}"
+#       turn_on:
+#         - service: ifttt.trigger
+#           data:
+#             event: back_track_light_on
+#         - service: input_boolean.turn_on
+#           data:
+#             entity_id: input_boolean.bl_back_track_light_switch_power
+#       turn_off:
+#         - service: ifttt.trigger
+#           data:
+#             event: back_track_light_off
+#         - service: input_boolean.turn_off
+#           data:
+#             entity_id: input_boolean.bl_back_track_light_switch_power
+
+#     bl_entrance_light_switch:
+#       value_template: "{{ states('input_boolean.bl_entrance_light_switch_power') }}"
+#       turn_on:
+#         - service: ifttt.trigger
+#           data:
+#             event: entrance_light_on
+#         - service: input_boolean.turn_on
+#           data:
+#             entity_id: input_boolean.bl_entrance_light_switch_power
+#       turn_off:
+#         - service: ifttt.trigger
+#           data:
+#             event: entrance_light_off
+#         - service: input_boolean.turn_off
+#           data:
+#             entity_id: input_boolean.bl_entrance_light_switch_power
+#     bl_walkway_light_switch:
+#       value_template: "{{ states('input_boolean.bl_walkway_light_switch_power') }}"
+#       turn_on:
+#         - service: ifttt.trigger
+#           data:
+#             event: walkway_light_on
+#         - service: input_boolean.turn_on
+#           data:
+#             entity_id: input_boolean.bl_walkway_light_switch_power
+#       turn_off:
+#         - service: ifttt.trigger
+#           data:
+#             event: walkway_light_off
+#         - service: input_boolean.turn_off
+#           data:
+#             entity_id: input_boolean.bl_walkway_light_switch_powerr
+
+#     bl_master_bedroom_led_light_switch:
+#       value_template: "{{ states('input_boolean.bl_master_bedroom_led_light_switch_power') }}"
+#       turn_on:
+#         - service: ifttt.trigger
+#           data:
+#             event: led_light_on
+#         - service: input_boolean.turn_on
+#           data:
+#             entity_id: input_boolean.bl_master_bedroom_led_light_switch_power
+#       turn_off:
+#         - service: ifttt.trigger
+#           data:
+#             event: led_light_off
+#         - service: input_boolean.turn_off
+#           data:
+#             entity_id: input_boolean.bl_master_bedroom_led_light_switch_power
+#     bl_master_bathroom_light_switch:
+#       value_template: "{{ states('input_boolean.bl_master_bathroom_light_switch_power') }}"
+#       turn_on:
+#         - service: ifttt.trigger
+#           data:
+#             event: master_bathroom_light_on
+#         - service: input_boolean.turn_on
+#           data:
+#             entity_id: input_boolean.bl_master_bathroom_light_switch_power
+#       turn_off:
+#         - service: ifttt.trigger
+#           data:
+#             event: master_bathroom_light_off
+#         - service: input_boolean.turn_off
+#           data:
+#             entity_id: input_boolean.bl_master_bathroom_light_switch_power
+
+light:
+  - platform: switch
+    name: Entrance Light
+    entity_id: switch.wall_switch_158d0004912bbe
+  - platform: switch
+    name: Walkway Light
+    entity_id: switch.wall_switch_158d0004912961
+  - platform: switch
+    name: Back Light
+    entity_id: switch.wall_switch_right_158d000461249f
+  - platform: switch
+    name: Front Light
+    entity_id: switch.wall_switch_left_158d000461249f
+  - platform: switch
+    name: Kitchen Light
+    entity_id: switch.wall_switch_left_158d0004a04f22
+  - platform: switch
+    name: Common Bathroom Light
+    entity_id: switch.wall_switch_158d0004848655
+  - platform: switch
+    name: Master Bedroom LED Light
+    entity_id: switch.wall_switch_158d0004865e28
+  - platform: switch
+    name: Master Bathroom Light
+    entity_id: switch.wall_switch_left_158d000479c522

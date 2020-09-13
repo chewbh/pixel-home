@@ -1,0 +1,104 @@
+input_number:
+  bl_master_bedroom_left_blind_position:
+    min: 0 # (blind is down) (cover closed)
+    max: 100 # (blind is not put down) (cover open)
+  bl_master_bedroom_right_blind_position:
+    min: 0
+    max: 100
+
+script:
+  master_bedroom_left_blind_cover_open:
+    sequence:
+      - service: input_number.set_value
+        data:
+          entity_id: input_number.bl_master_bedroom_left_blind_position
+          value: 100
+      - service: broadlink.send
+        data:
+          host: 192.168.24.128
+          # packet: "123"
+          packet: "sgiwBAsYDBcYDAwXDBgLGBcMDBgMFwwXGAABFpsxDBcMFwwYFwwMFxgLDRcMGAsYDBcYDBcMDBcYCwwYDBgMFwwXDBgLGAwXGAwLGBgMDBcMFwwYDBcMFwwYDBcXDQwXDBcMGBcMDBcMGAwXGAABF5oxCxgMFwwYFwwMFxgMCxgMGAwXDBgXDBcMDBcYDAwXDBgMFwwYCxgMFwwXGAwMFxgMDBcMFwwYDBcMGAsYDBcYDAwXDBgMFxcMDBcNFwwXGAABF5oxDBcMFwwYFwwMFxgMCxgMGAwXDBcYDBcMDBgXDAwXDBgMFwwYDBcMFwwYFwwMFxgMDBcMGAsYDBcMGAwXDBcYDAwYCxgMFxgMCxgMFwwYFwABHpswDBcMGAwXGAsMGBcMDBcMGAwXDBgXDBgLDBgXDAwXDBgMFwwXDBgMFwwYFwwMFxcNDBgLGAsYDBcMFwwYCxgXDQwXDBgLGBcMDBcMGAsYFwABGZoxCxgMFwwXGAwMFxcMDBgMGAsYDBcYCxgMCxgYDAsYDBcMGAwXDBcMGAwXFwwMGBcNCxgMFwwYCxgMFwwYCxgXDQsYDBcMGBcMDBcMGAsYFwABGJoxCxgMFwwYFwwMFxcMDBgMGAsYDBcYCxgMDBcXDAwYDBgLGAwXDBgLGAwXGAsMGBcNCxgMFwwYCxgLGAwXDBgXDAwYDBcMGBcMDBcMFwwYFwABF5oxDBgLGAsYGAsMGBcMDBcMGAwXDBgXDBcMDBgXDAwXDBgMFwwYDBcMFwwYFwwMFxgMDBcMGAwXDBcMGAwXDBcYDAwYCxgMFxgMCxgMFwwYFwABF5oxDBcMFwwYFwwMFxgMDBcMGAwXDBgXDBcMDBgXDAwXDBgMFwwXDBgMFwwYFwwMFxgMDBcMGAwXDBcMGAwXDBcYDAwXDBgLGBcMDBgMFwwXGAABF5oxCxgMFwwXGAwMFxcMDBgLGAwYCxgXDBgMCxgXDAwYCxgMGAsYDBgLGAwXGAsMGBcMDBgLGAwYCxgLGAwYCxgXDQsYDBcMFxgMDBcMFwwYFwABF5swDBgMFwwXGAwLGBcMDBgMFwwYCxgYCxgMCxgYCwwYCxgMGAwXDBgLGAwXGAwLGBcNCxgMFwwXDBgMFwwXDBgXDQsYDBcMGBcMDBcMGAsYFwABF5swDBgMFwwYFwwMFxcMDBgLGQsYDBcYCxgMDBcXDAwYDBgLGAwXDBcMGAwXGAsMGBcNCxgMFwwYCxgMFwwXDBgXDQwXDBgLGBcMDBcMGAsYFwABIpswDBgLGAwXFw0LGBcMDBcMGAwXDBgXDBcMDBgXDAwXDBgMFwwYCxgMFwwXGAwMFxgMDBcMGAsYDBcMGAsYCxgYDAwXDBcMGBcMDBcMGAwXFwABDpswDBgLGAwXGAwLGBcMDBcMGAwXDBgXDBgLDBgXDAwXDBgMFwwYDBcMFwwYFwwMFxgMDBcMGAwXDBcMGAsYDBcYDAwXDBgLGBgLDBgMFwwXGAABDZswDBgMFwwXGAsNFxgLDBcNFwwYDBcXDRcMCxgXDAwXDBgMFw0XDBcMFwwYFwwMFxgMDBcMGAwXDBcMGAwXDBcYDAwXDBgMFxcMDBgMFwwXGAAF3AAAAAAAAAAA"
+  master_bedroom_left_blind_cover_close:
+    sequence:
+      - service: input_number.set_value
+        data:
+          entity_id: input_number.bl_master_bedroom_left_blind_position
+          value: 0
+      - service: broadlink.send
+        data:
+          host: 192.168.24.128
+          # packet: "123"
+          packet: "sguwBAwXDBcYDAwYCxgXDBgMCxgMFxgMFwABF5oxDBcMGAwXFwwMGBcMDBcMGAwXDBgXDBgLDBcYDAwXDBgMFwwYDBcMGAsYFwwMFxgMDBcMGAwXDBgLGAwXDBcYDAwXDBgXDBgLDBgMFxgMFwABE5owDBgMFwwYFwwMFxgMCxgMGAsYDBcYCxgMDBcYCwwYDBcMGAwXDBcMGAwXGAsMGBcNCxgMFwwXDBgMFwwXDBgXDAwYDBcYDBcMDBcMFxgMFwABF5swDBgMFwwXGAwLGBcMDBgLGQsYDBcXDBgLDRcXDAwYDBcMGAsYDBcMGAwXGAsMFxgNCxgMFwwXDBgMFwwXDBgXDQsYDBcYDBcMCxgMFxgMFwABF5oxDBcMGAsYFwwMGBcMDBcMGAwXDBgXDBcMDBgXDAwXDBgMFwwXDBgMFwwYFwwMFxgMDBcMGAwXDBcMGAwXDBcXDQwXDBgXDBcMDBgMFxcMFwABI5swDBcMGAwXFwwMGBcMDBcMGAwXDBgXDBcMDBgXDAwXDBgMFwwXDBgMFwwXGAwLGBgMCxgMFwwYCxgMFwwYDBcXDQwXDBcYCxgMDBcMGBcMFwABGJswDBgLGAwXGAsMGBcMDBcMGAwXDBgXDBcMDBgXDAwXDBgMGAsYDBcMGAsYFwwMFxgMDBgMFwwXDBgLGAwXDBcYDAwXDRcXDBgLDBgMFxgLGAABF5owDBgMFwwYFwwMGBcMDBcMGAwXDBcYDBcMDBgXDAsYDBgMFwwXDBgLGAwXGAwMFxcNDBcMGAsYDBcMFwwYDBcYDAwXDBgXDBcMDBcMGBcMGAABFpswDBgMFwwXGAwLGBcMDBgLGAwYDBcYCxgMDBcXDAwYCxgMGAwXDBcMGAwXFwwMFxgMDBgMFwwXDBgMFwwXDBgXDAwYDBcYCxgLDRcMFxgMFwABF5oxDBcMFwwYFwwMFxgMDBcMGAwXDBcYDBcMDBcYDAsYDBgMFwwXDBgLGAwXGAwLGBcNDBcMFwwYDBcMFwwYDBcXDQwXDBgXDBcMDBcMGBcMGAABF5owDBgLGAwXGAwMFxcMDBcMGAwYDBcYCxgMCxgXDAwXDBgMFw0XDBcMGAwXFwwMFxgMDBcNFwwXDBgMFwwXDBgXDAwYDBcYCxgMDBcMFxgMFwABE5owDRcMFwwYFwwMFxgLDBgMGAwXDBcYDBcMDBcYDAsYDBgMFwwXDBgMFwwXGAsNFxgMDBcMFwwYCxgMGAsYCxgYDAwXDBgXDBcMDBgLGBcMGAABFpswDBgLGAwXGAwLGBcMDBgLGAwYDBcYCxgLDRcYDAsYCxgMGAwXDBcMGAsYGAsMGBcMDBgMFwwXDBgMFwwXDBgXDAwYDBcYDBcMDBcMFxgMFwABDZswDBgMFwwXGAwLGBcMDBcMGAwYDBcYCxgLDBgXDAwYCxgMGAsYDBcMGAwXGAsMGBcMDBgLGAwXDBcNFwwXDBgXDAwYDBcXDBgMDBcMFxgLGAABFZswDBcMGAwXFwwMGBcMDBcMGAwXDBgXDBgLDBgXDAwXDBgMFwwYCxgMFwwXGAwMFxgMDBcMFwwYDBcMFwwYDBcYDAwXDBcYCxgMDBcNFhgMFwAF3AAAAAAAAAAA"
+  master_bedroom_left_blind_cover_stop:
+    sequence:
+      - service: input_number.set_value
+        data:
+          entity_id: input_number.bl_master_bedroom_left_blind_position
+          value: 50
+      - service: broadlink.send
+        data:
+          host: 192.168.24.128
+          # packet: "123"
+          packet: "sgD8AJoxDBcMFw0XFwwMFxgLDRcMFw0WDRcYDBcLDRcYCw0XDBcNFwwXDBcNFwwXGAsNFxgLDRcMFwwXDRcMFwwXDRcYCw0XGAsMFxgMDBcYCwwYFwABE5swDBcMFw0XGAsMFxgMDBcMGAwXDBcYDBcMDBcYCw0XDBgMFwwXDRcMFwwXGAsNFxgMDBcMFwwYDBcMFw0XDBcYDAwXGAsMFxgMDBcYCw0XGAABE5swDBcMFw0XGAsMFxgMDBcMGAwXDBcYDBcMDBcYDAwXDBgMFwwXDBcNFwwXGAsNFxgMDBcMFw0XDBcMFw0XDBcYCw0XGAsMGBcMDBcYCw0XGAAF3AAAAAAAAAAAAAAAAA=="
+  master_bedroom_right_blind_cover_open:
+    sequence:
+      - service: input_number.set_value
+        data:
+          entity_id: input_number.bl_master_bedroom_right_blind_position
+          value: 100
+      - service: broadlink.send
+        data:
+          host: 192.168.24.128
+          # packet: "123"
+          packet: "sgiwBAwYFwwMGAwXDBcMGBcMDBcMGAwXGAABFpswDBgMFwwXGAwMFxgLDBcMGQsYDBcYCxgMDBcYCwwXDRcMGAwXDBcMGAwXGAsMFxgMDBgMFwwXDBcNFwwXGAwMGAwXDBcMGBcMDBcMFw0XFwABE5oxDBcMFw0XFwwMGBcMDBcMGAwXDBcYDBcMDBcYDAwXDBgMFwwXDBcNFwwXGAsNFxgMDBcMFwwYDBcMFwwYFwwMGAwXDBcNFxgLDBcNFwwXGAABFpsxDBcMFwwYFwwMFxgLDRcMFw0XDBcYDBgLDBcYCw0XDBgMFwwXDBgMFwwXGAwMFxgMDBcMFwwYDBcMFwwYFwwMGAwXDBgMFxcMDBcNFwwXGAABF5oxCxgMFwwXGAwMFxgLDBgMFw0XDBcYCxgMDBgXCw0XDBgLGAwXDBcMGAwXGAwLGBcMDRcMFwwYDBcMFwwXGAwMGAwXDBcMGBcMDBcMGAwXGAABIpswDBcMGAwXGAsMFxgMDBcMGAwXDBgXDBcMDBcYDAwXDBgMFwwXDBgMFwwXGAwMFxgMDBcMFwwYDBcMFwwYFwwMGAwXDBcMGBcMDBcMGAwXGAABF5swDBgMFwwXGAsNFxcMDBgMFwwXDRcYCxgLDRcYCwwXDBgMFw0XDBcMGAwXFwwMFxgMDBgMFwwXDBcNFwwXGAsMGAwYDBcMFxgMDBcMFwwYFwABF5swDBcMFwwYFwwMFxgMDBcMGAwXDBgXDBcMDBcYDAwXDBgMFwwXDBgMFwwXGAwMFxgMDBcMFwwYDBcMGAsYFwwMGAwXDBcMGBcMDBcMGAwXGAABFpswDBcNFwwXGAwMFxgLDBgMFwwYDBcYCxgMDBcYCwwYDBcMGAwXDBcNFwwXGAsMGBcMDRcMFwwYCxgMFwwYFwwMFw0XDBcMGBcMDBcMFw0XFwABF5swDBcMGAwXGAsMGBcMDBcMGAwXDBgXDBgLDBgXDAwXDBgMFw0XDBcMFwwYGAsMFxgMDBcMGAwXDBgLGAwXGAsMGAwXDBgMFxgLDRcMFwwXGAABF5oxDBcMFwwYFwwMFxgLDRcMGAwXDBcYDBcMDBcYDAwXDBgMFwwXDBgMFwwXGAwMFxgLDRcMFwwYDBcMFwwYFwwMGAwXDBcMGBcMDBcMGAwXGAABEpswDBcMGAwXGAsMGBcMDBcMGAwXDRcXDBgLDBcYDAwXDBgMFwwYDBcMFwwYFwwMFxgMDBcMGAwXDBcMGAwXGAsMGAwYCxgMFxgLDBgMFwwXGAABFpsxDBcMFwwYFwwMFxgLDRcMGAwXDBcYDBcMDBcYDAwXDBgMFwwYCxgMFwwYFwwMFxgMDBcMFwwYDBcMGAsYFwwMGAwXDBgLGBcMDBcMGAwXGAABDJswDRcMFwwXGAwMFxgLDBgMFwwYDBcYCxgMDBcYCwwXDRcMGAwXDBcMGAwXGAsMFxgMDBgMFwwXDBgMFwwXGAwMFwwYDBcMFxgMDBcMGAsYFwABFZswDBcMGAwXFwwMGBcMDBcMGAwXDBgXDBcMDBcYCw0XDBgMFwwXDBcNFwwXGAwLGBcMDBgMFwwXDBgMFwwXGAwMFwwYDBcMFxgMDBcMFwwYFwAF3AAAAAAAAAAA"
+  master_bedroom_right_blind_cover_close:
+    sequence:
+      - service: input_number.set_value
+        data:
+          entity_id: input_number.bl_master_bedroom_right_blind_position
+          value: 0
+      - service: broadlink.send
+        data:
+          host: 192.168.24.128
+          # packet: "123"
+          packet: "sg2wBAwXGAwMGAwXDBcYCxgMDBcMFxgMFwABGJswDBcMFwwYGAsMFxgMDBcMGAwXDBgXDBgLDBcYCw0XDBgMFwwYDBcMFwwXGAwMFxgMDBcNFwwXDBcMGAwXGAsMGAwXDBgXDBgLDBgMFxgLGAABIpswDRcMFwwXGAsNFxgLDBcNFwwYDBcYCxgLDBgXDAwXDBgMFw0XDBcMFw0XFwwMFxgMDBcMGAwXDBcNFwwXGAsMGAwXDRYYDBgLDBcNFxcMGAABGJoxDBcMGAwXFwwMFxgMDBcMGAwXDRcXDBcMDBcYDAwXDBgMFw0WDRcMFwwYFwwMFxgMDBcNFwwXDBgMFwwXGAwMFwwYDBcXDBgMDBcMFxgLGAABF5oxDBcMFw0XFwwMFxgLDRcMGAwXDBcYDBcMDBcYCw0XDBcNFwwXDBcNFwwXGAwMFxgMDBcMFwwYDBcMFwwYFwwMGAwXDBcYDBcMDBcMGBcMGAABF5owDBgMFwwXGAwMFxgLDBcNFw0WDRcYCxgMDBcYCwwYDBcMFw0XDBcNFwwXGAsMGBcMDBgMFwwXDRcMFwwXGAwMGAwXDBcYCxgMDBcMFxgMFwABF5swDBcNFg0XGAsMGBcMDBcMGAwXDBgYCxgLDRcXDAwXDBgMFwwYDBcMFwwXGAwMFxgMDBcMGAwXDBcMGAwXGAsMGAwXDBgXDBgLDRYNFxgLGAABFpswDRcMFw0XFwwMFxgLDRcMGAwXDBcYDBcMDBcYDAwXDBgMFwwXDRcMFwwYFwwMFxgMDBcMFw0XDBcMFw0XFwwMGAwXDBgXDBgLDBgMFxgLGAABEpswDRcMFwwXGAwMFxgLDBgMGAwXDBcYDBcMDBcYCw0XDBgMFwwXDRcMFwwXGAwMFxgMDBcMFwwYDBcMFwwYFwwMGAwXDBcYDBcMDBcNFxgLGAABFpsxDBcMFwwXGAwMFxgLDBgMGAwXDBcYDBcMDBcYCw0XDBgMFwwXDRYNFwwXGAwMFxgMDBcMFwwYDBcMFwwYFwwMGAwXDBcYDBcMDBcNFxcMGAABFpswDRcMFwwXGAwMFxgLDRcMFw0XDBcYCxgLDRcYCw0XDBgMFwwXDRYNFwwXGAsNFxgMDBcMFwwXDRcMFwwYFwwMGAwXDBgXDBcMDBgMFxcMGAABIpswDBcNFwwXGAsNFhgMDBcMGAwXDBcYDBgLDBcYDAwXDBgMFwwYDBcMFw0XFwwMFxgMDBcMFw0XDBcMFw0XGAsMGAwXDRcXDBgLDBcNFxgLGAABGJowDRcMFw0XGAsMFxgMDBcMGAwXDBgXDBcMDBgXDAwXDBgMFwwXDRcMFwwYGAsMFxgMDBcMFw0XDBcNFg0XGAsNFwwXDRcXDBgLDBgMFxgLGAABDZswDBcNFg0XGAsMFxgMDBcMGAwXDRYZCxgMDBYZCwwXDBgMFw0WDRcMFw0XGAsMGBcMDRcMFwwXDBcNFwwXGAsNFwwYDBcYCxgMDBcMFxgMFwABDpswDBcNFwwXGAsMGBcMDBcMGAwXDBcZCxgLDRYYDAwXDBgMFwwYDBcMFwwYFwwMFxgMDBcMGAwXDBcMFw0XGAsMGAwXDRcYCxgLDRYNFxgLGAAF3AAAAAAAAAAA"
+  master_bedroom_right_blind_cover_stop:
+    sequence:
+      - service: input_number.set_value
+        data:
+          entity_id: input_number.bl_master_bedroom_right_blind_position
+          value: 50
+      - service: broadlink.send
+        data:
+          host: 192.168.24.128
+          packet: "sgBQAZswDRYNFwwXGAsNFxgLDBgMFw0XDBcYCxgMDBcYCwwYDBcMGAwXDBcMGAwXGAsNFxcMDRcMFwwXDRcMFwwXGAwMGAwXGAsMFxgMDBcYCwwYFwABE5swDBgMFwwXGAsNFxcMDBcNFwwXDRcYCxgLDRcYCwwXDRcMFw0XDBcMGAwXGAsMGBcMDBgMFwwXDBcNFwwXGAwMFw0XFwwMGBcMDBcYDAwXFwABE5swDBgMFwwXGAwMFxgLDRcMFw0XDBcYCxgMDBcYCw0XDBgMFwwXDBgMFg0XGAwMFxgMDBcMFwwYDBcMFwwYFwwMGAwXGAsNFxcMDBcYDAwXGAABHpswDBcNFg0XGAsMGBcMDBcMGAwXDBgXDBgLDBgXDAwXDBgMFwwYDBcMFwwYFwwMFxgMDBcMGAwXDBcMGAwXGAsMGAwXGAwMFxgLDBgYCwwXGAAF3AAAAAAAAAAA"
+          # packet: "123"
+cover:
+  - platform: template
+    covers:
+      master_bedroom_left_blind:
+        device_class: blind
+        friendly_name: "Master Bedroom Left Blind"
+        position_template: "{{ states('input_number.bl_master_bedroom_left_blind_position') | int }}"
+        open_cover:
+          service: script.master_bedroom_left_blind_cover_open
+        close_cover:
+          service: script.master_bedroom_left_blind_cover_close
+        stop_cover:
+          service: script.master_bedroom_left_blind_cover_stop
+        set_cover_tilt_position:
+          service: script.master_bedroom_left_blind_cover_stop
+  - platform: template
+    covers:
+      master_bedroom_right_blind:
+        device_class: blind
+        friendly_name: "Master Bedroom Right Blind"
+        position_template: "{{ states('input_number.bl_master_bedroom_right_blind_position') | int }}"
+        open_cover:
+          service: script.master_bedroom_right_blind_cover_open
+        close_cover:
+          service: script.master_bedroom_right_blind_cover_close
+        stop_cover:
+          service: script.master_bedroom_right_blind_cover_stop
+        set_cover_tilt_position:
+          service: script.master_bedroom_right_blind_cover_stop

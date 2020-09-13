@@ -4,9 +4,6 @@
 # light.led_lights:
 #   icon: mdi:led-strip
 
-binary_sensor.internet_connection:
-  friendly_name: Internet Connection
-# light.ensuite_fan:
-#   icon: mdi:fan
-#   hidden: true
+# binary_sensor.internet_connection:
+#   friendly_name: Internet Connection
 

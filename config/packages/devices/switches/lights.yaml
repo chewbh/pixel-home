@@ -129,7 +129,12 @@ light:
     entity_id: switch.wall_switch_158d0004848655
   - platform: switch
     name: Master Bedroom LED Light
-    entity_id: switch.wall_switch_158d0004865e28
+    entity_id: switch.wall_switch_5e28
   - platform: switch
     name: Master Bathroom Light
     entity_id: switch.wall_switch_left_158d000479c522
+  - platform: group
+    name: Living Room Lights
+    entities:
+      - light.front_light
+      - light.back_light

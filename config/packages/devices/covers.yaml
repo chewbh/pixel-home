@@ -102,3 +102,9 @@ cover:
           service: script.master_bedroom_right_blind_cover_stop
         set_cover_tilt_position:
           service: script.master_bedroom_right_blind_cover_stop
+
+  - platform: group
+    name: master bedroom blinds
+    entities:
+      - cover.master_bedroom_left_blind
+      - cover.master_bedroom_right_blind

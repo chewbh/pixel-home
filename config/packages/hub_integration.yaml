@@ -9,3 +9,7 @@ ifttt:
 #   discovery_retry: 5
 #   gateways:
 #     - key: !secret gateway_xiaomi_key
+
+# xiaomi_aqara
+# bedroom gateway - 04cf8cf31411
+# living room gateway - 04cf8cabcea7

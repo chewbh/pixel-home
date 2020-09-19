@@ -39,6 +39,11 @@
         entity_id: binary_sensor.wall_switch_left_158d00049dec74
       event_type: xiaomi_aqara.click
       platform: event
+    - event_data:
+        click_type: single
+        entity_id: binary_sensor.wall_switch_left_158d00049debd9
+      event_type: xiaomi_aqara.click
+      platform: event
   condition: []
   action:
     - entity_id: light.back_light
@@ -54,26 +59,36 @@
         entity_id: binary_sensor.wall_switch_right_158d00049dec74
       event_type: xiaomi_aqara.click
       platform: event
+    - event_data:
+        click_type: single
+        entity_id: binary_sensor.wall_switch_right_158d00049debd9
+      event_type: xiaomi_aqara.click
+      platform: event
   condition: []
   action:
     - entity_id: light.front_light
       service: light.toggle
       data: {}
 
-# - id: "19000000023"
-#   alias: "alternate_living_room_fan_switch"
-#   description: "Alternate Switch for Living Room Fan Switch"
-#   trigger:
-#     - event_data:
-#         click_type: single
-#         entity_id: binary_sensor.wall_switch_both_158d00049dec74
-#       event_type: xiaomi_aqara.click
-#       platform: event
-#   condition: []
-#   action:
-#     - entity_id: fan.front_light
-#       service: fan.toggle
-#       data: {}
+- id: "19000000023"
+  alias: "alternate_living_room_fan_switch"
+  description: "Alternate Switch for Living Room Fan Switch"
+  trigger:
+    - event_data:
+        click_type: both
+        entity_id: binary_sensor.wall_switch_both_158d00049dec74
+      event_type: xiaomi_aqara.click
+      platform: event
+    - event_data:
+        click_type: both
+        entity_id: binary_sensor.wall_switch_both_158d00049debd9
+      event_type: xiaomi_aqara.click
+      platform: event
+  condition: []
+  action:
+    - entity_id: fan.living_room_fan
+      service: fan.toggle
+      data: {}
 
 # Papa Bedroom Wireless Switch Setup
 - id: "19000000011"
@@ -95,70 +110,134 @@
 - id: "19000000031"
   alias: bathroom_night_light_on
   trigger:
-    platform: state
-    entity_id: binary_sensor.motion_sensor_158d00036bef62
-    from: "off"
-    to: "on"
+    - platform: state
+      entity_id:
+        - binary_sensor.motion_sensor_158d00036bef62
+        - binary_sensor.motion_sensor_158d00057f7ace
+      from: "off"
+      to: "on"
   condition:
-    - condition: time
-      after: "16:00:00"
-      before: "7:00:00"
+    condition: and
+    conditions:
+      - condition: time
+        after: "16:00:00"
+        before: "7:00:00"
+      - condition: state
+        entity_id: light.master_bathroom_light
+        state: "off"
   action:
     - service: light.turn_on
       entity_id: light.master_bathroom_light
-    - service: automation.turn_on
-      data:
-        entity_id: automation.bathroom_night_light_off_aft_1min
+    # - service: automation.turn_on
+    #   data:
+    #     entity_id: automation.bathroom_night_light_off_aft_1min
+# motion_sensor_158d00057f7ace
 
 - id: "19000000032"
-  alias: bathroom_night_light_off_aft_1min
-  initial_state: false
+  alias: bathroom_night_light_off_no_motion
+  # initial_state: false
   trigger:
     platform: state
-    entity_id: binary_sensor.motion_sensor_158d00036bef62
+    entity_id:
+      - binary_sensor.motion_sensor_158d00036bef62
+      - binary_sensor.motion_sensor_158d00057f7ace
     from: "on"
     to: "off"
     for:
-      seconds: 10
+      seconds: 3
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: light.master_bathroom_light
+        state: "on"
+      - condition: state
+        entity_id:
+          - binary_sensor.motion_sensor_158d00036bef62
+          - binary_sensor.motion_sensor_158d00057f7ace
+        state: "off"
   action:
     - service: light.turn_off
       entity_id: light.master_bathroom_light
-    - service: automation.turn_off
-      data:
-        entity_id: automation.bathroom_night_light_off_aft_1min
+    # - service: automation.turn_off
+    #   data:
+    #     entity_id: automation.bathroom_night_light_off_aft_1min
 
 # motion sensor in bathroom (common bathroom)
 - id: "19000000041"
   alias: common_bathroom_night_light_on
   trigger:
     platform: state
-    entity_id: binary_sensor.motion_sensor_158d00033aabc7
+    entity_id:
+      - binary_sensor.motion_sensor_158d00033aabc7
+      - binary_sensor.motion_sensor_158d00057ff72d
     from: "off"
     to: "on"
   condition:
-    - condition: time
-      after: "16:00:00"
-      before: "7:00:00"
+    condition: and
+    conditions:
+      - condition: time
+        after: "16:00:00"
+        before: "7:00:00"
+      - condition: state
+        entity_id: light.common_bathroom_light
+        state: "off"
   action:
     - service: light.turn_on
       entity_id: light.common_bathroom_light
-    - service: automation.turn_on
-      data:
-        entity_id: automation.common_bathroom_night_light_off_aft_1min
+    # - service: automation.turn_on
+    #   data:
+    #     entity_id: automation.common_bathroom_night_light_off_aft_1min
 
 - id: "19000000042"
-  alias: common_bathroom_night_light_off_aft_1min
-  initial_state: false
+  alias: common_bathroom_night_light_off_no_motion
+  # initial_state: false
   trigger:
     platform: state
-    entity_id: binary_sensor.motion_sensor_158d00033aabc7
+    entity_id:
+      - binary_sensor.motion_sensor_158d00033aabc7
+      - binary_sensor.motion_sensor_158d00057ff72d
     from: "on"
     to: "off"
     for:
-      seconds: 10
+      seconds: 3
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: light.common_bathroom_light
+        state: "on"
+      - condition: state
+        entity_id:
+          - binary_sensor.motion_sensor_158d00033aabc7
+          - binary_sensor.motion_sensor_158d00057ff72d
+        state: "off"
   action:
     - service: light.turn_off
       entity_id: light.common_bathroom_light
-    - service: automation.turn_off
-      data:
-        entity_id: automation.common_bathroom_night_light_off_aft_1min
+    # - service: automation.turn_off
+    #   data:
+    #     entity_id: automation.common_bathroom_night_light_off_aft_1min
+
+- id: "19000000051"
+  alias: entrance_light_open_on_front_door_open_when_living_room_lights_off_at_night
+  trigger:
+    platform: state
+    entity_id: binary_sensor.door_window_sensor_158d000303072f
+    from: "off"
+    to: "on"
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: light.entrance_light
+        state: "off"
+      - condition: state
+        entity_id: light.living_room_lights
+        state: "off"
+      - condition: time
+        after: "18:30:00"
+        before: "5:00:00"
+  action:
+    - service: light.turn_on
+      entity_id: light.entrance_light

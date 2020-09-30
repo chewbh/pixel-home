@@ -135,7 +135,6 @@
 
 - id: "19000000032"
   alias: bathroom_night_light_off_no_motion
-  # initial_state: false
   trigger:
     platform: state
     entity_id:
@@ -156,12 +155,12 @@
           - binary_sensor.motion_sensor_158d00036bef62
           - binary_sensor.motion_sensor_158d00057f7ace
         state: "off"
+      - condition: time
+        after: "16:00:00"
+        before: "7:00:00"
   action:
     - service: light.turn_off
       entity_id: light.master_bathroom_light
-    # - service: automation.turn_off
-    #   data:
-    #     entity_id: automation.bathroom_night_light_off_aft_1min
 
 # motion sensor in bathroom (common bathroom)
 - id: "19000000041"
@@ -185,13 +184,9 @@
   action:
     - service: light.turn_on
       entity_id: light.common_bathroom_light
-    # - service: automation.turn_on
-    #   data:
-    #     entity_id: automation.common_bathroom_night_light_off_aft_1min
 
 - id: "19000000042"
   alias: common_bathroom_night_light_off_no_motion
-  # initial_state: false
   trigger:
     platform: state
     entity_id:
@@ -212,12 +207,12 @@
           - binary_sensor.motion_sensor_158d00033aabc7
           - binary_sensor.motion_sensor_158d00057ff72d
         state: "off"
+      - condition: time
+        after: "16:00:00"
+        before: "7:00:00"
   action:
     - service: light.turn_off
       entity_id: light.common_bathroom_light
-    # - service: automation.turn_off
-    #   data:
-    #     entity_id: automation.common_bathroom_night_light_off_aft_1min
 
 - id: "19000000051"
   alias: entrance_light_open_on_front_door_open_when_living_room_lights_off_at_night

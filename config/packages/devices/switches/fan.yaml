@@ -72,15 +72,13 @@ fan:
           service: script.mama_bedroom_fan_on
         turn_off:
           service: script.mama_bedroom_fan_off
-        speeds:
-          - "med"
 
   # papa's bedroom fan
   - platform: smartir
     name: Papa Bedroom Fan
     unique_id: papa_bedroom_fan
     device_code: 3002
-    controller_data: 192.168.24.128
+    controller_data: remote.living_room_rm3_pro
     power_sensor: binary_sensor.papa_bedroom_fan_power
 
   # living room fan
@@ -88,7 +86,7 @@ fan:
     name: Living Room Fan
     unique_id: living_room_fan
     device_code: 3003
-    controller_data: 192.168.24.128
+    controller_data: remote.living_room_rm3_pro
     power_sensor: binary_sensor.living_room_fan_power
 
   # balcony fan
@@ -96,7 +94,7 @@ fan:
     name: Balcony Fan
     unique_id: balcony_fan
     device_code: 3001
-    controller_data: 192.168.24.128
+    controller_data: remote.living_room_rm3_pro
     power_sensor: binary_sensor.balcony_fan_power
 
     # master bedroom fan
@@ -104,7 +102,7 @@ fan:
     name: Master Bedroom Fan
     unique_id: master_bedroom_fan
     device_code: 3004
-    controller_data: 192.168.24.128
+    controller_data: remote.living_room_rm3_pro
     power_sensor: binary_sensor.master_bedroom_fan_power
 
 # switches for fan light via RF control
@@ -113,16 +111,16 @@ switch:
     host: 192.168.24.128
     mac: "78:0F:77:FD:78:F6"
     switches:
-      bl_living_room_ceiling_fan_light_switch:
+      - name: bl_living_room_ceiling_fan_light_switch
         command_on: "sgCgAAsdCh0LHR4KCh0LHR0KHgoKHR4KCh0eCgqSCh0LHQodCh4eCQsdCxwLHQscCx0LHQodHgoKHQscCx0LHR4JCx0KHQsdCh4KHR4KCh0LHR4JHgoKHR4KCh0eCguSCh0LHQscCx0eCQsdCxwLHQsdCh0LHQodHgoLHAsdCh0LHR4JCx0LHQodCx0KHR4KCxwLHR4KHQoLHB8JCxweCgsABdwAAAAAAAAAAA=="
         command_off: "sgCgAAsdCh0LHR4KCh0LHR0KHgoKHR4KCh0eCgqSCh0LHQodCh4eCQsdCxwLHQscCx0LHQodHgoKHQscCx0LHR4JCx0KHQsdCh4KHR4KCh0LHR4JHgoKHR4KCh0eCguSCh0LHQscCx0eCQsdCxwLHQsdCh0LHQodHgoLHAsdCh0LHR4JCx0LHQodCx0KHR4KCxwLHR4KHQoLHB8JCxweCgsABdwAAAAAAAAAAA=="
-      bl_balcony_ceiling_fan_light_switch:
+      - name: bl_balcony_ceiling_fan_light_switch
         command_on: "sgBMAQoeCh0LHgodHgoKHgoeCh4KHgoeCh0LHR4KCh4KHgoeCh4dCh4KHgoeCgoeCh4eCgoeHQsdCgsdHgoeCgoeHgoKkwoeCh4KHQsdHgoKHgoeCh4KHgoeCh0LHR4KCh4KHgoeCh4dCx0KHgoeCgoeCh4eCgoeHQsdCwodHgoeCgoeHgoKkwoeCh4KHgodHgoKHgoeCh4KHgoeCh4KHR4KCx0KHgoeCh4eCh4KHQoeCgoeCh4eCgoeHQsdCwodHgsdCgoeHgoKlAsdCh4KHgoeHQoLHQoeCh4KHgoeCh4KHh0LCR4LHQoeCh4eCh4KHQsdCwodCx0eCgoeHgoeCgoeHQsdCgsdHgoKlQoeCR4KHgoeHQsKHgodCx0LHQoeCh4KHh0LCh4KHgodCx0eCh4KHgodCwoeCh0eCwoeHQoeCgoeHgoeCgoeHQsJAAXcAAAAAAAAAAAAAAAA"
         command_off: "sgBMAQoeCh0LHgodHgoKHgoeCh4KHgoeCh0LHR4KCh4KHgoeCh4dCh4KHgoeCgoeCh4eCgoeHQsdCgsdHgoeCgoeHgoKkwoeCh4KHQsdHgoKHgoeCh4KHgoeCh0LHR4KCh4KHgoeCh4dCx0KHgoeCgoeCh4eCgoeHQsdCwodHgoeCgoeHgoKkwoeCh4KHgodHgoKHgoeCh4KHgoeCh4KHR4KCx0KHgoeCh4eCh4KHQoeCgoeCh4eCgoeHQsdCwodHgsdCgoeHgoKlAsdCh4KHgoeHQoLHQoeCh4KHgoeCh4KHh0LCR4LHQoeCh4eCh4KHQsdCwodCx0eCgoeHgoeCgoeHQsdCgsdHgoKlQoeCR4KHgoeHQsKHgodCx0LHQoeCh4KHh0LCh4KHgodCx0eCh4KHgodCwoeCh0eCwoeHQoeCgoeHgoeCgoeHQsJAAXcAAAAAAAAAAAAAAAA"
-      bl_papa_bedroom_ceiling_fan_light_switch:
+      - name: bl_papa_bedroom_ceiling_fan_light_switch
         command_on: "sgAMARkIGQgZCBoHGggZCAgYCRcaCBkICBgIGBoIGQgIGAgYGQgaCAgYCBgJGAgYGQgZCAn0GQgZCBoIGQgZCBoICBgJFxkIGggIGAkXGggZCAkYCBgZCBoICBgIGAkYCBgZCBkICfUZCBkIGQgaCBkIGggIGAkXGggZCAkYCBgZCRkICBgJGBkIGQkIGAgYCRgIGBkIGggI9RkIGggZCBoHGggaBwkYCRgZCBkJCBgJGBkIGQgJGAgYGQkZCAkYCBgIGAkXGggZCAn1GQkZCBkIGggZCBoICRgIGBoIGQgJGAgYGQgaCAkYCBgZCBoICRgIGAgYCRgZCBoICPYZCBkIGggaCBkIGggIGAkABdwAAAAAAAAAAAAAAAA="
         command_off: "sgAMARkIGQgZCBoHGggZCAgYCRcaCBkICBgIGBoIGQgIGAgYGQgaCAgYCBgJGAgYGQgZCAn0GQgZCBoIGQgZCBoICBgJFxkIGggIGAkXGggZCAkYCBgZCBoICBgIGAkYCBgZCBkICfUZCBkIGQgaCBkIGggIGAkXGggZCAkYCBgZCRkICBgJGBkIGQkIGAgYCRgIGBkIGggI9RkIGggZCBoHGggaBwkYCRgZCBkJCBgJGBkIGQgJGAgYGQkZCAkYCBgIGAkXGggZCAn1GQkZCBkIGggZCBoICRgIGBoIGQgJGAgYGQgaCAkYCBgZCBoICRgIGAgYCRgZCBoICPYZCBkIGggaCBkIGggIGAkABdwAAAAAAAAAAAAAAAA="
-      bl_master_bedroom_ceiling_fan_light_switch:
+      - name: bl_master_bedroom_ceiling_fan_light_switch
         command_on: "sgBKAQoeCh0KHR4KCxwLHQoeCh0LHQodCx0dCgsdCh0LHQodHgoeCgodCh4KHR4KHQoLHR0KCx0dCh4KHQoeCgodC5ELHQodCx0KHR4KCh0LHQodCx0LHAsdCh0eCgoeCh0KHgodHgodCgoeCh0LHR0KHgoLHB4KCh0eCh4KHQoeCQsdCpIKHQsdCh0LHR4JCx0KHQsdCh4KHQscCx0eCgodCh4KHQsdHQoeCgoeCh0KHR4KHQsKHR4JCx0eCh0KHgodCgsdCpIKHQodCx0KHh0KCh4KHQsdCh0LHQodCh4dCgsdCh0LHQodHgoeCgodCh4KHR4JHgoLHR4JCx0dCh4KHQoeCgodC5ILHQodCx0KHR4KCh0LHQodCx0KHQsdCh0eCgoeCh0LHQodHgoeCQsdCh0LHR0KHgoLHR0KCx0dCh4KHQoeCgodCwAF3AAAAAAAAAAAAAAAAAAA"
         command_off: "sgBKAQoeCh0KHR4KCxwLHQoeCh0LHQodCx0dCgsdCh0LHQodHgoeCgodCh4KHR4KHQoLHR0KCx0dCh4KHQoeCgodC5ELHQodCx0KHR4KCh0LHQodCx0LHAsdCh0eCgoeCh0KHgodHgodCgoeCh0LHR0KHgoLHB4KCh0eCh4KHQoeCQsdCpIKHQsdCh0LHR4JCx0KHQsdCh4KHQscCx0eCgodCh4KHQsdHQoeCgoeCh0KHR4KHQsKHR4JCx0eCh0KHgodCgsdCpIKHQodCx0KHh0KCh4KHQsdCh0LHQodCh4dCgsdCh0LHQodHgoeCgodCh4KHR4JHgoLHR4JCx0dCh4KHQoeCgodC5ILHQodCx0KHR4KCh0LHQodCx0KHQsdCh0eCgoeCh0LHQodHgoeCQsdCh0LHR0KHgoLHR0KCx0dCh4KHQoeCgodCwAF3AAAAAAAAAAAAAAAAAAA"
 

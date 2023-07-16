@@ -11,7 +11,8 @@
 appdaemon/appdaemon.yaml
 appdaemon/*.log*
 
-home-assistant.log
+home-assistant.log*
+
 home-assistant_v2.db
 home-assistant_v2.db-shm
 home-assistant_v2.db-wal
@@ -42,3 +43,6 @@ known_devices.yaml
 .cloud
 .google.token
 custom_deps/
+config/backups/
+config/custom_components/smartir/__pycache__/*
+config/custom_components/tahoma/__pycache__/*

@@ -1,0 +1,3 @@
+[submodule "SmartIR"]
+	path = SmartIR
+	url = https://github.com/smartHomeHub/SmartIR.git

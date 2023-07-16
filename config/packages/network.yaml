@@ -9,20 +9,3 @@ binary_sensor:
     host: 8.8.8.8 # ping google to check
     count: 2
     scan_interval: 30
-
-asuswrt:
-  host: 192.168.50.1
-  username: !secret network_router_username
-  password: !secret network_router_password
-  port: 45505
-  # ssh_key: /config/id_rsa
-  sensors:
-    - devices
-    - upload
-    - download
-    - upload_speed
-    - download_speed
-
-speedtestdotnet:
-  scan_interval:
-    minutes: 60

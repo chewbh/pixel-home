@@ -1,15 +1,8 @@
 ifttt:
   key: !secret ifttt_key
-# somfy:
-#   client_id: "CUEBIGYC1eOiUGEK8A1D3p3P5CY6Y5t9A6V7m_1gdSdMSfhEn2v3BIPF6LyfYXgSlRc3xsF4W6IEcJMrKxO783QB"
-#   client_key: "hDEJL8CTwdSUqyWdA2cMUHOWL1R04UuiRlVk8JGLYYH378hLVy"
-#
+  
 # xiaomi_aqara:
 #   # define interface for broadcast discovery
 #   discovery_retry: 5
 #   gateways:
 #     - key: !secret gateway_xiaomi_key
-
-# xiaomi_aqara
-# bedroom gateway - 04cf8cf31411
-# living room gateway - 04cf8cabcea7

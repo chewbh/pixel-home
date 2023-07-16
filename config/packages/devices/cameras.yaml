@@ -1,10 +1,10 @@
-camera:
-  - platform: onvif
-    name: Living Room Camera
-    host: http://192.168.66.209:2020/onvif/device_service
-    port: 2020
-    username: !secret camera_living_room_username
-    password: !secret camera_living_room_password
+# camera:
+#   - platform: onvif
+#     name: Living Room Camera
+#     host: http://192.168.10.221:2020/onvif/device_service
+#     port: 2020
+#     username: !secret camera_living_room_username
+#     password: !secret camera_living_room_password
   # - platform: mjpeg
   #   name: Parent Bedroom Camera
   #   still_image_url: http://192.168.89.222/image/jpeg.cgi

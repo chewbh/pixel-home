@@ -236,3 +236,28 @@
   action:
     - service: light.turn_on
       entity_id: light.entrance_light
+
+- id: "19000000101"
+  alias: rainy_days_blind_close
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.sengkang_rainfall
+    above: 0.2
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: cover.ziptrak_balcony_blind
+        state: "open"
+  action:
+    - service: cover.close_cover
+      entity_id: cover.ziptrak_balcony_blind
+
+
+
+
+
+
+
+
+

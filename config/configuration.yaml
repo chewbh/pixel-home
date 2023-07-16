@@ -7,7 +7,9 @@ homeassistant:
   elevation: !secret home_elevation
   unit_system: metric
   time_zone: Asia/Singapore
-  external_url: !secret external_url
+  country: SG
+  external_url: https://home.boonheng.sg
+  internal_url: http://192.168.2.250:8123
 
   # customization
   customize: !include customize.yaml
@@ -17,6 +19,10 @@ homeassistant:
   # include packages
   packages: !include_dir_named packages
 
+http:
+  use_x_forwarded_for: true
+  trusted_proxies: 192.168.2.250
+
 # enable default home assistant components
 default_config:
 
@@ -25,10 +31,6 @@ person:
 
 # enable system health
 system_health:
-
-# don't check for update directly
-updater:
-  reporting: false
 
 frontend:
   themes: !include_dir_merge_named themes
